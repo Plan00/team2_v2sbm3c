@@ -3,9 +3,8 @@
 
 <div>
   <h3>물리적</h3>
-  <img src='https://github.com/Plan00/team2_v2sbm3c/assets/123847576/9731449d-fb4f-4b3d-9e63-116658a979c3' width="400px">
+  <img src='https://github.com/Plan00/team2_v2sbm3c/assets/123847576/77209c3f-9db7-427d-a3a5-d9b262145baf' width="400px">
   <br><br>
   <h3>논리적</h3>
-  <img src='https://github.com/Plan00/team2_v2sbm3c/assets/123847576/38f034ee-9e0d-4579-bd77-40d50c54373c' width="400px">
+  <img src='https://github.com/Plan00/team2_v2sbm3c/assets/123847576/53aad42b-889b-4d93-887e-1e4ed201fbe0' width="400px">
 </div>
-
