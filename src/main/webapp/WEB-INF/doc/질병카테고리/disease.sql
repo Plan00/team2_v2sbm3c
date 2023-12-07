@@ -53,11 +53,6 @@ SELECT dno, dname FROM disease ORDER BY dno ASC;
 
 COMMIT;
 
--- 비회원/회원 SELECT LIST, id: list_all_y
-SELECT dno, dname
-FROM disease 
-ORDER BY dno ASC;
-
 
 
 
