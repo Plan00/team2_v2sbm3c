@@ -7,6 +7,7 @@ package dev.mvc.disease;
 public class DiseaseVO {
   private int dno;
   private String dname;
+  private int seqno;
   
   public int getDno() {
     return dno;
@@ -20,10 +21,17 @@ public class DiseaseVO {
   public void setDname(String dname) {
     this.dname = dname;
   }
+  public int getSeqno() {
+    return seqno;
+  }
+  public void setSeqno(int seqno) {
+    this.seqno = seqno;
+  }
   @Override
   public String toString() {
-    return "DiseaseVO [dno=" + dno + ", dname=" + dname + "]";
+    return "DiseaseVO [dno=" + dno + ", dname=" + dname + ", seqno=" + seqno + "]";
   }
+  
   
 }
 
