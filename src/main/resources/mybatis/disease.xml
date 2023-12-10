@@ -6,24 +6,30 @@
 <mapper namespace="dev.mvc.disease.DiseaseDAOInter">
   <!-- return: 등록한 레코드 갯수를 1을 리턴, parameterType: 전달받는 데이터 -->
   <insert id="create" parameterType="dev.mvc.disease.DiseaseVO">
-    INSERT INTO disease(dno, dname) VALUES(disease_seq.nextval, #{dname}) 
+    INSERT INTO disease(dno, dname, cnt, rdate) VALUES(disease_seq.nextval, #{dname}, 0, sysdate) 
   </insert>
 
-  <!-- 전체 목록, SQL -> DiseaseVO -> ArrayList<DiseaseVO> return -->
+  <!-- 출력 모드 적용 -->
   <select id="list_all" resultType="dev.mvc.disease.DiseaseVO">
-    SELECT dno, dname
-    FROM disease
-    ORDER BY dno ASC
+    SELECT dno, dname, cnt, rdate, seqno, visible FROM disease ORDER BY seqno ASC
   </select>
-      
+  
+  <!-- 비회원/회원 SELECT LIST -->
+  <select id="list_all_y" resultType="dev.mvc.disease.DiseaseVO">
+    SELECT dno, dname, cnt, rdate, seqno, visible
+    FROM disease
+    WHERE visible='Y'
+    ORDER BY seqno ASC
+  </select>
+  
   <!-- 읽기, SQL -> DiseaseVO return -->
   <select id="read" resultType="dev.mvc.disease.DiseaseVO" parameterType="int">
-    SELECT dno, dname FROM disease WHERE dno=#{dno}
+    SELECT dno, dname, cnt, rdate, seqno, visible FROM disease WHERE dno=#{dno}
   </select>
-
+  
   <!-- return: 수정한 레코드 갯수 리턴, parameterType: 수정할 레코드 정보 -->
   <update id="update" parameterType="dev.mvc.disease.DiseaseVO">
-    UPDATE disease SET dname=#{dname}
+    UPDATE disease SET dname=#{dname}, cnt=#{cnt} 
     WHERE dno=#{dno}
   </update>
   
@@ -31,6 +37,26 @@
   <delete id="delete" parameterType="int">
     DELETE FROM disease WHERE dno=#{dno}
   </delete>
+  
+  <!-- 우선 순위 높임, 10등 -> 1등 -->
+  <update id="update_seqno_forward" parameterType="int">
+    UPDATE disease SET seqno = seqno - 1 WHERE dno=#{dno}
+  </update>
+  
+  <!-- 우선 순위 낮춤, 10등 -> 1등 -->
+  <update id="update_seqno_backward" parameterType="int">
+    UPDATE disease SET seqno = seqno + 1 WHERE dno=#{dno}
+  </update>
+  
+  <!-- 카테고리 공개 설정 -->
+  <update id="update_visible_y" parameterType="int">
+    UPDATE disease SET visible = 'Y' WHERE dno=#{dno}
+  </update>
+  
+  <!-- 카테고리 비공개 설정 -->
+  <update id="update_visible_n" parameterType="int">
+    UPDATE disease SET visible = 'N' WHERE dno=#{dno}
+  </update>
           
 </mapper>
 

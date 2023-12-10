@@ -23,7 +23,7 @@ public class HomeCont {
   }
   
   // http://localhost:9093
-  @RequestMapping(value= {"", "/", "/index.do", "/index.pill"}, method=RequestMethod.GET)
+  @RequestMapping(value= {"", "/", "/index.do"}, method=RequestMethod.GET)
   public ModelAndView home() {
     System.out.println("-> home() ver 2.0");
     
@@ -40,8 +40,8 @@ public class HomeCont {
   public ModelAndView top() {
     ModelAndView mav = new ModelAndView();
     
-//    ArrayList<DiseaseVO> list_top = this.diseaseProc.list_all();
-//    mav.addObject("list_top", list_top);
+    ArrayList<DiseaseVO> list_top = this.diseaseProc.list_all();
+    mav.addObject("list_top", list_top);
     
     mav.setViewName("/menu/top"); // /WEB-INF/views/menu/top.jsp
     

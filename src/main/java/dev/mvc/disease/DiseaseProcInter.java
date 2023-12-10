@@ -36,4 +36,38 @@ public interface DiseaseProcInter {
    * @return 삭제된 레코드 갯수
    */
   public int delete(int dno);
+  
+  /**
+   * 우선 순위 높임, 10등 -> 1등  
+   * @param dno
+   * @return 수정된 레코드 갯수
+   */
+  public int update_seqno_forward(int dno);
+  
+  /**
+   * 우선 순위 낮춤, 1등 -> 10등  
+   * @param dno
+   * @return 수정된 레코드 갯수
+   */
+  public int update_seqno_backward(int dno);
+  
+  /**
+   * 카테고리 공개 설정
+   * @param dno
+   * @return 수정된 레코드 갯수
+   */
+  public int update_visible_y(int dno);
+  
+  /**
+   * 카테고리 비공개 설정
+   * @param dno
+   * @return 수정된 레코드 갯수
+   */
+  public int update_visible_n(int dno);
+  
+  /**
+   * 비회원/회원 SELECT LIST
+   * @return
+   */
+  public ArrayList<DiseaseVO> list_all_y();
 }

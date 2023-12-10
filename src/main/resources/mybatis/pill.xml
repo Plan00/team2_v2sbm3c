@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="dev.mvc.pill.PillDAOInter">
+  <!-- 등록한 레코드 갯수 1 리턴, #{manager_no}: public int getManagerno() 호출됨 -->
+  <insert id="create" parameterType="dev.mvc.pill.PillVO">
+    INSERT INTO pill(pill_no, manager_no, dno, pill_name, efficacy, side, passwd, search
+                              file1, file1saved, thumb1, size1, rdate)
+    VALUES(pill_seq.nextval, #{manager_no}, #{dno}, #{pill_name}, #{efficacy}, #{side},
+                          #{file1}, #{file1saved}, #{thumb1}, #{size1}, sysdate)
+  </insert>
+  
+  <!-- 모든 카테고리의 등록된 글목록 -->
+  <select id="list_all" resultType="dev.mvc.pill.PillVO">
+    SELECT pill_no, manager_no, dno, pill_name, efficacy, side, views, passwd, search, rdate,
+               file1, file1saved, thumb1, size1
+    FROM pill
+    ORDER BY pill_no DESC
+  </select> 
+  
+  <!-- 특정 카테고리의 등록된 글목록 -->
+  <select id="list_by_dno" resultType="dev.mvc.pill.PillVO" parameterType="int">
+    SELECT pill_no, manager_no, dno, pill_name, efficacy, side, views, passwd, search, rdate,
+               file1, file1saved, thumb1, size1
+    FROM pill 
+    WHERE dno = #{dno}
+    ORDER BY pill_no DESC
+  </select>
+  
+  <!-- 일반적인 조회 -->
+  <select id="read" resultType="dev.mvc.pill.PillVO" parameterType="int">
+    SELECT pill_no, manager_no, dno, pill_name, efficacy, side, views, passwd, search, rdate,
+               file1, file1saved, thumb1, size1
+    FROM pill
+    WHERE pill_no = #{pill_no}
+  </select>
+  
+  <!-- 카테고리별 검색 목록 -->
+  <select id="list_by_dno_search" resultType="dev.mvc.pill.PillVO" parameterType="HashMap">
+    SELECT pill_no, manager_no, dno, pill_name, efficacy, side, views, passwd, search, rdate,
+               file1, file1saved, thumb1, size1
+    FROM pill
+    <choose>
+      <when test="search == null or search == ''"> <!-- 검색하지 않는 경우 -->
+        WHERE dno=#{dno}
+      </when>
+      <otherwise> <!-- 검색하는 경우 -->
+        WHERE dno=#{dno} AND (UPPER(pill_name) LIKE '%' || UPPER(#{search}) || '%'
+                                                  OR UPPER(efficacy) LIKE '%' || UPPER(#{search}) || '%' 
+                                                  OR UPPER(side) LIKE '%' || UPPER(#{search}) || '%')
+      </otherwise>
+    </choose>
+    ORDER BY pill_no DESC   
+  </select>
+   
+  <!-- 카테고리별 검색 레코드 갯수 -->
+  <select id="search_count" resultType="int" parameterType="HashMap">
+    SELECT COUNT(*) as cnt
+    FROM pill
+    <choose>
+      <when test="search == null or search == ''"> <!-- 검색하지 않는 경우의 레코드 갯수 -->
+        WHERE dno=#{dno}
+      </when>
+      <otherwise> <!-- 검색하는 경우의 레코드 갯수 -->
+        WHERE dno=#{dno} AND (UPPER(pill_name) LIKE '%' || UPPER(#{search}) || '%' 
+                                                  OR UPPER(efficacy) LIKE '%' || UPPER(#{search}) || '%' 
+                                                  OR UPPER(side) LIKE '%' || UPPER(#{search}) || '%')
+      </otherwise>
+    </choose>
+  </select>
+  
+  <!-- 카테고리별 검색 + 페이징 목록 -->
+  <select id="list_by_dno_search_paging" resultType="dev.mvc.pill.PillVO" parameterType="dev.mvc.pill.PillVO">
+   SELECT pill_no, manager_no, dno, pill_name, efficacy, side, views, passwd, search, rdate, file1, file1saved, thumb1, size1, r
+   FROM (
+              SELECT pill_no, manager_no, dno, pill_name, efficacy, side, views, passwd, search, rdate, file1, file1saved, thumb1, size1, rownum as r
+              FROM (
+                        SELECT pill_no, manager_no, dno, pill_name, efficacy, side, views, passwd, search, rdate, file1, file1saved, thumb1, size1
+                        FROM pill
+                        <choose>
+                          <when test="search == null or search == ''"> <!-- 검색하지 않는 경우 -->
+                            WHERE dno=#{dno}
+                          </when>
+                          <otherwise>
+                            WHERE dno=#{dno} AND (UPPER(pill_name) LIKE '%' || UPPER(#{search}) || '%' 
+                                                              OR UPPER(efficacy) LIKE '%' || UPPER(#{search}) || '%' 
+                                                              OR UPPER(side) LIKE '%' || UPPER(#{search}) || '%')
+                          </otherwise>
+                        </choose>
+                        ORDER BY pill_no DESC
+               )
+    )
+    WHERE <![CDATA[ r >= #{start_num} AND r <= #{end_num} ]]>
+     
+    <!-- 1 page: WHERE r >= 1 AND r <= 10; 
+          2 page: WHERE r >= 11 AND r <= 20;
+          3 page: WHERE r >= 21 AND r <= 30; -->
+  </select>
+  
+  <!-- 패스워드 검사 -->
+  <select id="password_check" resultType="int" parameterType="HashMap">
+    SELECT COUNT(*) as cnt 
+    FROM pill
+    WHERE pill_no = #{pill_no} AND passwd=#{passwd}
+  </select>
+  
+  <!-- 글 수정 -->
+  <update id="update_text" parameterType="dev.mvc.pill.PillVO">
+    UPDATE pill
+    SET pill_name=#{pill_name}, efficacy=#{efficacy},  side=#{side}, serach=#{search}
+    WHERE pill_no = #{pill_no}
+  </update>
+  
+  <!-- 파일 수정 -->
+  <update id="update_file" parameterType="dev.mvc.pill.PillVO">
+    UPDATE pill
+    SET file1=#{file1}, file1saved=#{file1saved}, thumb1=#{thumb1}, size1=#{size1}
+    WHERE pill_no = #{pill_no}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+    DELETE FROM pill
+    WHERE pill_no=#{pill_no}
+  </delete>
+  
+  <!-- 특정 카테고리에 속한 레코드 갯수를 리턴 -->
+  <select id="count_by_dno" resultType="int" parameterType="int">
+    SELECT COUNT(*) as cnt 
+    FROM pill 
+    WHERE dno=#{dno}
+  </select>
+  
+  <!-- 특정 카테고리에 속한 모든 레코드 삭제 -->
+  <delete id="delete_by_dno" parameterType="int">
+    DELETE FROM pill
+    WHERE dno=#{dno}
+  </delete>
+  
+</mapper> 
