@@ -57,20 +57,20 @@
     
     <div>
        <label>제목</label>
-       <input type='text' name='pill_name' value='여기에 제목 입력' required="required" 
+       <input type='text' name='pill_name' value='' required="required" 
                  autofocus="autofocus" class="form-control" style='width: 100%;'>
     </div>
     <div>
        <label>효과</label>
-       <textarea name='efficacy' required="required" class="form-control" rows="12" style='width: 100%;'>여기에 효과 입력</textarea>
+       <textarea name='efficacy' required="required" class="form-control" rows="12" style='width: 100%;'></textarea>
     </div>
     <div>
        <label>부작용</label>
-       <textarea name='side' required="required" class="form-control" rows="12" style='width: 100%;'>여기에 부작용 입력</textarea>
+       <textarea name='side' required="required" class="form-control" rows="12" style='width: 100%;'></textarea>
     </div>
     <div>
        <label>검색어</label>
-       <input type='text' name='search' value='여기에 검색어 입력' required="required" 
+       <input type='text' name='search' value='' required="required" 
                  class="form-control" style='width: 100%;'>
     </div>   
     <div>

@@ -6,6 +6,7 @@
 <c:set var="pill_no" value="${pillVO.pill_no }" />
 <c:set var="pill_name" value="${pillVO.pill_name }" />
 <c:set var="efficacy" value="${pillVO.efficacy }" />
+<c:set var="side" value="${pillVO.side }" />
 <c:set var="search" value="${pillVO.search }" />
  
 <!DOCTYPE html> 
@@ -70,8 +71,12 @@
                  autofocus="autofocus" class="form-control" style='width: 100%;'>
     </div>
     <div>
-       <label>내용</label>
+       <label>효과</label>
        <textarea name='efficacy' required="required" class="form-control" rows="12" style='width: 100%;'>${efficacy }</textarea>
+    </div>
+    <div>
+       <label>부작용</label>
+       <textarea name='side' required="required" class="form-control" rows="12" style='width: 100%;'>${side }</textarea>
     </div>
     <div>
        <label>검색어</label>

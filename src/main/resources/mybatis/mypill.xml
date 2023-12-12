@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="dev.mvc.mypill.MypillDAOInter">
+  <!-- 등록한 레코드 갯수 1 리턴-->
+  <insert id="create" parameterType="dev.mvc.mypill.MypillVO">
+    INSERT INTO mypill(mypill_no, memberno, pill_no, mypill_name, mypill_date)
+    VALUES(mypill_seq.nextval, #{memberno}, #{pill_no}, #{mypill_name}, sysdate)
+  </insert>
+  
+  <!-- 내 알약 목록 -->
+  <select id="list_all" resultType="dev.mvc.mypill.MypillVO">
+    SELECT mypill_no, memberno, pill_no, mypill_name, mypill_date
+    FROM mypill
+    ORDER BY mypill_no DESC
+  </select> 
+  
+  <!-- 삭제 -->
+  <delete id="delete" parameterType="int">
+    DELETE FROM mypill
+    WHERE mypill_no=#{mypill_no}
+  </delete>
+  
+ 
+</mapper> 

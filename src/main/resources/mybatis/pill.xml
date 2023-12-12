@@ -4,9 +4,9 @@
 <mapper namespace="dev.mvc.pill.PillDAOInter">
   <!-- 등록한 레코드 갯수 1 리턴, #{manager_no}: public int getManagerno() 호출됨 -->
   <insert id="create" parameterType="dev.mvc.pill.PillVO">
-    INSERT INTO pill(pill_no, manager_no, dno, pill_name, efficacy, side, passwd, search
+    INSERT INTO pill(pill_no, manager_no, dno, pill_name, efficacy, side, passwd, search,
                               file1, file1saved, thumb1, size1, rdate)
-    VALUES(pill_seq.nextval, #{manager_no}, #{dno}, #{pill_name}, #{efficacy}, #{side},
+    VALUES(pill_seq.nextval, #{manager_no}, #{dno}, #{pill_name}, #{efficacy}, #{side}, #{passwd}, #{search}, 
                           #{file1}, #{file1saved}, #{thumb1}, #{size1}, sysdate)
   </insert>
   
@@ -107,7 +107,7 @@
   <!-- 글 수정 -->
   <update id="update_text" parameterType="dev.mvc.pill.PillVO">
     UPDATE pill
-    SET pill_name=#{pill_name}, efficacy=#{efficacy},  side=#{side}, serach=#{search}
+    SET pill_name=#{pill_name}, efficacy=#{efficacy},  side=#{side}, search=#{search}
     WHERE pill_no = #{pill_no}
   </update>
   

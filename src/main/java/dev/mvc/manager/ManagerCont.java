@@ -94,7 +94,7 @@ public class ManagerCont {
      int cnt = managerProc.login(managerVO);
      if (cnt == 1) { // 로그인 성공시 회원 정보 조회
        ManagerVO managerVO_read = managerProc.read_by_manager_id(managerVO.getManager_id()); // DBMS에서 id를 이용한 회원 조회
-       session.setAttribute("managerno", managerVO_read.getManager_no()); // 서버의 메모리에 기록
+       session.setAttribute("manager_no", managerVO_read.getManager_no()); // 서버의 메모리에 기록
        session.setAttribute("manager_id", managerVO_read.getManager_id());
        session.setAttribute("manager_mname", managerVO_read.getManager_name());
        session.setAttribute("manager_grade", managerVO_read.getManager_grade());

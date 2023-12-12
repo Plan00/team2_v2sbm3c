@@ -48,7 +48,7 @@ public class MemberCont {
                          produces = "text/plain;charset=UTF-8" )
   public String checkID(String id) {
     try {
-      Thread.sleep(3000); // 3 초 지연
+      Thread.sleep(2000); // 3 초 지연
     }catch(Exception e) {
       
     }

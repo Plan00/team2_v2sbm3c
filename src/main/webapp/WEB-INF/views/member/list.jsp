@@ -61,7 +61,7 @@
       <c:set var="id" value ="${memberVO.id}" />
       <c:set var="mname" value ="${memberVO.mname}" />
       <c:set var="tel" value ="${memberVO.tel}" />
-      <c:set var="rdate" value ="${memberVO.rdate}" />
+      <c:set var="mdate" value ="${memberVO.mdate}" />
        
     <TR>
       <TD class='td_basic'>
@@ -75,7 +75,7 @@
       <TD class='td_left'><A href="./read.do?memberno=${memberno}">${id}</A></TD>
       <TD class='td_left'><A href="./read.do?memberno=${memberno}">${mname}</A></TD>
       <TD class='td_basic'>${memtel}</TD>
-      <TD class='td_basic'>${rdate.substring(0, 10)}</TD> <%-- 년월일 --%>
+      <TD class='td_basic'>${mdate.substring(0, 10)}</TD> <%-- 년월일 --%>
       <TD class='td_basic'>
         <A href="./passwd_update.do?memberno=${memberno}"><IMG src='/member/images/passwd.png' title='패스워드 변경' class="icon"></A>
         <A href="./read.do?memberno=${memberno}"><IMG src='/member/images/update.png' title='수정' class="icon"></A>

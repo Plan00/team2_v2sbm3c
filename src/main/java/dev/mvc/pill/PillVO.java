@@ -10,9 +10,10 @@ import org.springframework.web.multipart.MultipartFile;
 //VIEWS   NUMBER(7) DEFAULT 0 NOT NULL,
 //PASSWD VARCHAR2(15)         NOT NULL,
 //SEARCH VARCHAR2(50) NULL ,
-//FILE1 VARCHAR(100),
-//FILE1SAVED VARCHAR(100),
-//THUMB1 VARCHAR2(100),
+//RDATE DATE NOT NULL,
+//FILE1 VARCHAR(100) NULL,
+//FILE1SAVED VARCHAR(100) NULL,
+//THUMB1 VARCHAR2(100) NULL,
 //SIZE1 NUMBER(10),
 //EFFICACY VARCHAR2(2000),
 //SIDE VARCHAR2(2000),
@@ -29,6 +30,7 @@ public class PillVO {
   private int views;
   private String passwd = "";
   private String search = "";
+  private String rdate = "";
   private String efficacy = "";
   private String side = "";
 
@@ -162,6 +164,12 @@ public class PillVO {
   }
   public void setPasswd(String passwd) {
     this.passwd = passwd;
+  }
+  public String getRdate() {
+    return rdate;
+  }
+  public void setRdate(String rdate) {
+    this.rdate = rdate;
   }
   
   

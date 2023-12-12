@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import dev.mvc.pill.Pill;
 import dev.mvc.pill.PillVO;
 import dev.mvc.manager.ManagerProcInter;
+import dev.mvc.member.MemberProcInter;
 import dev.mvc.disease.DiseaseProcInter;
 import dev.mvc.disease.DiseaseVO;
 import dev.mvc.tool.Tool;
@@ -35,6 +36,10 @@ public class PillCont {
   @Autowired 
   @Qualifier("dev.mvc.pill.PillProc")
   private PillProcInter pillProc;
+  
+  @Autowired 
+  @Qualifier("dev.mvc.member.MemberProc")
+  private MemberProcInter memberProc;
   
   public PillCont() {
     System.out.println("-> PillCont Created");
@@ -219,7 +224,8 @@ public class PillCont {
     pillVO.setEfficacy(efficacy);
     
     long size1 = pillVO.getSize1();
-    pillVO.setSize1_label(Tool.unit(size1));
+    String size1_label = Tool.unit(size1);
+    pillVO.setSize1_label(size1_label);
     
     mav.addObject("pillVO", pillVO);
     

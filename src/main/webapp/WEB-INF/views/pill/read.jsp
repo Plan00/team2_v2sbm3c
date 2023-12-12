@@ -50,10 +50,6 @@
       <span class='menu_divide' >│</span>
       <A href="./update_file.do?pill_no=${pill_no}&now_page=${param.now_page}">파일 수정</A>  
       <span class='menu_divide' >│</span>
-      <A href="./map.do?dno=${dno }&pill_no=${pill_no}">지도</A>
-      <span class='menu_divide' >│</span>
-      <A href="./youtube.do?dno=${dno }&pill_no=${pill_no}">Youtube</A>
-      <span class='menu_divide' >│</span>
       <A href="./delete.do?pill_no=${pill_no}&now_page=${param.now_page}&dno=${dno}">삭제</A>  
       <span class='menu_divide' >│</span>
     </c:if>
@@ -95,7 +91,6 @@
         <DIV style="width: 100%; word-break: break-all;">
           <c:choose>
             <c:when test="${thumb1.endsWith('jpg') || thumb1.endsWith('png') || thumb1.endsWith('gif')}">
-              <%-- /static/contents/storage/ --%>
               <img src="/pill/storage/${file1saved }" style='width: 50%; float: left; margin-top: 0.5%; margin-right: 1%;'> 
             </c:when>
             <c:otherwise> <!-- 기본 이미지 출력 -->
@@ -105,8 +100,15 @@
 
           <span style="font-size: 1.5em; font-weight: bold;">${pill_name }</span>
           <span style="font-size: 1em;"> ${rdate }</span><br>
-          ${efficacy }
+          효과: ${efficacy }
         </DIV>
+      </li>
+      
+      <li class="li_none" style="clear: both;">
+        <div style='text-decoration: none;'>
+          <br>
+          부작용: ${side }
+        </div>
       </li>
       
       <li class="li_none" style="clear: both;">
@@ -114,7 +116,8 @@
           <br>
           검색어(키워드): ${search }
         </div>
-      </li>   
+      </li>
+      
       <li class="li_none">
         <div>
           <c:if test="${file1.trim().length() > 0 }">
@@ -123,6 +126,18 @@
           </c:if>
         </div>
       </li> 
+      
+      <li class="li_none" style="clear: both;">
+        <c:if test="${sessionScope.id != null }">
+          <form name='frm' method='post' action='#' enctype="multipart/form-data">
+            <div class="content_body_bottom">
+              <button type="submit" class="btn btn-secondary btn-sm">내 알약 등록</button>
+            </div>
+          </form>
+        </c:if>
+      </li>
+      
+      
     </ul>
   </fieldset>
 
