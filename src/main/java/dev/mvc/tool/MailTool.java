@@ -20,16 +20,16 @@ public class MailTool {
     public void send(String receiver, String from, String title, String content) {
       Properties props = new Properties();
       props.put("mail.smtp.host", "smtp.gmail.com");
-      props.put("mail.smtp.port", "587");
-      props.put("mail.smtp.auth", "true");
+      props.put("mail.smtp.port", "");
+      props.put("mail.smtp.auth", "");
       props.put("mail.smtp.starttls.enable", "true");
       props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
       
       // 3. SMTP 서버정보와 사용자 정보를 기반으로 Session 클래스의 인스턴스 생성
       Session session = Session.getInstance(props, new javax.mail.Authenticator() {
           protected PasswordAuthentication getPasswordAuthentication() {
-              String user="planarian4538@gmail.com";
-              String password="fxcl eixz qjfx hwdn";
+              String user="여기에 계정";
+              String password="여기에 패스워드";
               return new PasswordAuthentication(user, password);
           }
       });
