@@ -57,7 +57,7 @@
     
     <div>
        <label>제목</label>
-       <input type='text' name='pill_name' value='목소리 복제 TTS' required="required" 
+       <input type='text' name='pill_name' value='여기에 제목 입력' required="required" 
                  autofocus="autofocus" class="form-control" style='width: 100%;'>
     </div>
     <div>
@@ -79,7 +79,7 @@
     </div>   
     <div>
        <label>패스워드</label>
-       <input type='password' name='passwd' value='여기에 비밀번호 입력' required="required" 
+       <input type='password' name='passwd' value='' required="required" 
                  class="form-control" style='width: 50%;'>
     </div>   
     <div class="content_body_bottom">

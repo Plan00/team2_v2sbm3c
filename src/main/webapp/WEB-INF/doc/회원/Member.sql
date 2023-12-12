@@ -10,7 +10,8 @@ CREATE TABLE Member(
 memberno NUMBER(10) NOT NULL,
 id VARCHAR2(30) NOT NULL UNIQUE,
 passwd VARCHAR2(30) NOT NULL,
-mname VARCHAR2(60)NOT NULL,
+mname VARCHAR2(30) NOT NULL,
+tel VARCHAR(14) NOT NULL,
 mdate DATE NOT NULL,
 grade NUMBER(2)     NOT NULL,
 PRIMARY KEY (memberno)
@@ -21,6 +22,7 @@ COMMENT ON COLUMN Member.memberno is '회원 번호';
 COMMENT ON COLUMN Member.id is '아이디';
 COMMENT ON COLUMN Member.passwd is '패스워드';
 COMMENT ON COLUMN Member.mname is '성명';
+COMMENT ON COLUMN Member.tel is '전화번호';
 COMMENT ON COLUMN Member.mdate is '가입일';
 COMMENT ON COLUMN Member.grade is '등급';
 
