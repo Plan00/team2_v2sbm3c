@@ -28,8 +28,8 @@ public class MailTool {
       // 3. SMTP 서버정보와 사용자 정보를 기반으로 Session 클래스의 인스턴스 생성
       Session session = Session.getInstance(props, new javax.mail.Authenticator() {
           protected PasswordAuthentication getPasswordAuthentication() {
-              String user="planarian4538@gmail.com";
-              String password="fxcl eixz qjfx hwdn";
+              String user="";
+              String password="";
               return new PasswordAuthentication(user, password);
           }
       });
