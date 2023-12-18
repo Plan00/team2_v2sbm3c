@@ -9,39 +9,38 @@
 <style>
   .top_menu_link:link{  /* 방문전 상태 */
     text-decoration: none; /* 밑줄 삭제 */
-    color: #FFFFFF;
+    color: #AAAAAA;
     font-weight: bold;
   }
 
   .top_menu_link:visited{  /* 방문후 상태 */
     text-decoration: none; /* 밑줄 삭제 */
-    color: #FFFFFF;
+    color: #AAAAAA;
     font-weight: bold;
   }
 
   .top_menu_link:hover{  /* A 태그에 마우스가 올라간 상태 */
     text-decoration: none; /* 밑줄 출력 */
-    color: #FFFFFF;
+    color: #AAAAAA;
     font-size: 1.05em;
   }
 </style> 
 
 <div class='container_main'>
   <div class='top_img'>
-    <div class="top_menu_label" style="font: bold; color: silver; font-family: sans-serif; font-size: large;">알약 정보 사이트</div>      
+    <div class="top_menu_label">알약 정보 사이트</div>      
   </div> <!-- <div class='top_img'></div> 종료 -->
   
-
-  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-      <a class="navbar-brand" href="/"><img src='/css/images/home.png' title="시작페이지" style='display: block; padding-left: 5px;'></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle Navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>    
-
-      <div class="collapse navbar-collapse bg-dark" id="navbarCollapse">
+  <nav class="navbar navbar-expand-md navbar-dark navbar-custom">
+    <a class="navbar-brand" href="/"><img src='/css/images/home.png' title="시작페이지" style='display: block; padding-left: 5px;'></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle Navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav mr-auto">
             <%-- 게시판 목록 출력 --%>
-            <c:forEach var="diseaseVO" items="${list_top }">
+              <c:forEach var="diseaseVO" items="${list_top }">
                 <c:set var="dno" value="${diseaseVO.dno }" />
                 <c:set var="dname" value="${diseaseVO.dname }" />
                 <li class="nav-item"> <%-- 서브 메뉴가 없는 독립메뉴 --%>
@@ -52,7 +51,7 @@
             <li class="nav-item"> <%-- 서브 메뉴가 없는 독립메뉴 --%>
               <a class="nav-link top_menu_link" href="/pill/list_all.do">전체 글 목록</a>
             </li>
-
+            
             <li class="nav-item dropdown"> <%-- 회원 서브 메뉴 --%>
               <a class="nav-link top_menu_link dropdown-toggle" data-bs-toggle="dropdown" href="#">회원</a>
               <div class="dropdown-menu">
@@ -66,7 +65,6 @@
                     <a class="dropdown-item" href="/member/read.do">가입 정보</a>
                     <a class="dropdown-item" href="/member/passwd_update.do">비밀번호 변경</a>
                     <a class="dropdown-item" href="/member/read.do">회원 정보 수정</a>
-                    <a class="dropdown-item" href="/mypill/list_all.do">내 알약</a>
                     <a class="dropdown-item" href="javascript: alert('개발 예정')">증상에 따른 질병 찾기</a>
                     <a class="dropdown-item" href="javascript: alert('개발 예정')">로그인 내역</a>
                     <a class="dropdown-item" href="javascript: alert('개발 예정')">회원 탈퇴</a>
@@ -74,7 +72,7 @@
                 </c:choose>
               </div>
             </li>
-          
+            
             <c:choose>
               <c:when test="${sessionScope.manager_id == null }">
                 <li class="nav-item">
@@ -96,7 +94,7 @@
             <li class="nav-item"> <%-- 서브 메뉴가 없는 독립메뉴 --%>
               <c:choose>
                   <c:when test="${sessionScope.id == null}">
-                      <a class="nav-link top_menu_link" href="/member/login.do">회원 로그인</a>
+                      <a class="nav-link top_menu_link" href="/member/login.do">로그인</a>
                   </c:when>
                   <c:otherwise>
                       <a class="nav-link top_menu_link" href='/member/logout.do'>${sessionScope.id } 로그아웃</a>

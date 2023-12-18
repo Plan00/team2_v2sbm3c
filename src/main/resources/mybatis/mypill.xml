@@ -21,5 +21,13 @@
     WHERE mypill_no=#{mypill_no}
   </delete>
   
+  <!-- 체크 -->
+	<select id="check" resultType="int" parameterType="map">
+	  SELECT COUNT(mypill_no) as cnt
+	  FROM mypill
+	  WHERE memberno=#{memberno} AND pill_no=#{pill_no}
+	</select>
+
+  
  
 </mapper> 

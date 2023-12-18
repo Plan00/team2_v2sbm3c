@@ -55,7 +55,7 @@ public class MailCont {
         String title = "아이디 찾기";
         String content = memberVO.getId();
         
-        mav.setViewName("/mail/sended");  // /WEB-INF/views/mail/sended.jsp
+        mav.setViewName("redirect:/mail/sended.do");  // /WEB-INF/views/mail/sended.jsp
 
         MailTool mailTool = new MailTool();
         mailTool.send(receiver, from, title, content); // 메일 전송
@@ -102,7 +102,7 @@ public class MailCont {
               String title = "비밀번호 찾기";
               String content = memberVO.getPasswd();
 
-              mav.setViewName("/mail/sended");  // /WEB-INF/views/mail/sended.jsp
+              mav.setViewName("redirect:/mail/sended.do");  // /WEB-INF/views/mail/sended.jsp
 
               MailTool mailTool = new MailTool();
               mailTool.send(receiver, from, title, content); // 메일 전송
@@ -117,7 +117,20 @@ public class MailCont {
     }
     
     /**
-     * 새로고침 방지, EL에서 param으로 접근, POST -> GET -> /mail/msg.jsp
+     * 새로고침 방지, EL에서 param으로 접근, POST -> GET -> /mail/sended.jsp
+     * @return
+     */
+    @RequestMapping(value="/mail/sended.do", method=RequestMethod.GET)
+    public ModelAndView sended(String url){
+      ModelAndView mav = new ModelAndView();
+
+      mav.setViewName(url); // forward
+      
+      return mav; // forward
+    }
+    
+    /**
+     * 새로고침 방지, EL에서 param으로 접근, POST -> GET -> /mail/sended.jsp
      * @return
      */
     @RequestMapping(value="/mail/msg.do", method=RequestMethod.GET)
@@ -128,5 +141,5 @@ public class MailCont {
       
       return mav; // forward
     }
-
+    
 }

@@ -30,6 +30,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head> 
  
 <body>
@@ -127,16 +128,20 @@
         </div>
       </li> 
       
-      <li class="li_none" style="clear: both;">
-        <c:if test="${sessionScope.id != null }">
-          <form name='frm' method='post' action='#' enctype="multipart/form-data">
-            <div class="content_body_bottom">
-              <button type="submit" class="btn btn-secondary btn-sm">내 알약 등록</button>
-            </div>
-          </form>
-        </c:if>
+      <li class="li_none">
+          <c:if test="${sessionScope.id != null }">
+              <div class="content_body_bottom">
+                <form name='frm' method='post' action='/mypill/create.do' enctype="multipart/form-data">
+                    <input type="hidden" id="pill_no" name="pill_no" value="${pill_no}">
+                    <input type="hidden" id="pill_no" name="pill_no" value="${pill_no}">
+                    <button type="submit" id="create_mypill_btn" class="btn btn-secondary btn-sm">내 알약 등록</button>
+                </form>
+                <form name='frm' method='post' action='/mypill/delete.do' enctype="multipart/form-data" >
+                    <button type="submit" id="delete_mypill_btn" class="btn btn-secondary btn-sm" style="margin-top: 5pt;">내 알약 삭제</button>
+                </form>
+              </div>
+          </c:if>
       </li>
-      
       
     </ul>
   </fieldset>

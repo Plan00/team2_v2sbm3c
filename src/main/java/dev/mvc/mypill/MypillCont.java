@@ -6,37 +6,36 @@ import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import dev.mvc.disease.DiseaseProcInter;
 import dev.mvc.member.MemberProcInter;
-import dev.mvc.pill.Pill;
 import dev.mvc.pill.PillProcInter;
-import dev.mvc.pill.PillVO;
-import dev.mvc.mypill.MypillVO;
 import dev.mvc.mypill.MypillVO;
 import dev.mvc.tool.Tool;
-import dev.mvc.tool.Upload;
 
 @Controller
 public class MypillCont {
   @Autowired 
-  @Qualifier("dev.mvc.disease.DiseaseProc")
-  private DiseaseProcInter diseaseProc;
-  
-  @Autowired 
   @Qualifier("dev.mvc.mypill.MypillProc")
   private MypillProcInter mypillProc;
+  
+  @Qualifier("dev.mvc.mypill.MypillVO")
+  private MypillVO mypillVO;
   
   @Autowired 
   @Qualifier("dev.mvc.member.MemberProc")
   private MemberProcInter memberProc;
+  
+  @Autowired 
+  @Qualifier("dev.mvc.pill.PillProc")
+  private PillProcInter pillProc;
   
   public MypillCont() {
     System.out.println("-> MypillCont Created");
@@ -77,6 +76,60 @@ public class MypillCont {
   }
   
   /**
+   * 등록 처리 http://localhost:9093/mypill/create.do
+   * 
+   * @return
+   */
+  @RequestMapping(value = "/mypill/create.do", method = RequestMethod.POST)
+  public ModelAndView create(HttpServletRequest request, HttpSession session, MypillVO mypillVO) {
+    ModelAndView mav = new ModelAndView();
+    
+    if (memberProc.isMember(session)) { // 회원으로 로그인한경우
+      int memberno = (int)session.getAttribute("memberno"); // memberno FK
+      mypillVO.setMemberno(memberno);
+      
+      String pillNoString = request.getParameter("pill_no");
+      int pill_no = Integer.parseInt(pillNoString);
+      mypillVO.setPill_no(pill_no);
+      
+      String mypill_name = request.getParameter("pill_name");
+      mypillVO.setMypill_name(mypill_name);
+      
+      HashMap<String, Integer> map = new HashMap<String, Integer>();
+      map.put("memberno", memberno);
+      map.put("pill_no", pill_no);
+      
+      int check = this.mypillProc.check(map);
+      
+      if (check == 0) { // 등록된 알약이 없으면, 등록 진행
+        int cnt = this.mypillProc.create(mypillVO);
+        
+        if (cnt == 1) {
+          mav.addObject("code", "create_success");
+          mav.addObject("mypill_name", mypillVO.getMypill_name());
+          mav.addObject("url", "/mypill/msg");
+          mav.setViewName("redirect:/pill/msg.do");
+        } else {
+          mav.addObject("code", "create_fail");
+          mav.setViewName("redirect:/pill/msg.do");
+        }
+        mav.addObject("cnt", cnt); // request.setAttribute("cnt", cnt)
+      } else { // 등록된 알약이 있으면, 등록 불가
+        mav.addObject("code", "already");
+        mav.addObject("url", "/mypill/msg");
+        mav.setViewName("redirect:/pill/msg.do");
+      }
+    
+    } else {
+      mav.addObject("url", "/member/login_need"); 
+      mav.setViewName("redirect:/member/msg.do");
+    }
+    
+    return mav;
+  }
+
+  
+  /**
    * 삭제 처리 http://localhost:9093/mypill/delete.do
    * 
    * @return
@@ -84,13 +137,35 @@ public class MypillCont {
   @RequestMapping(value = "/mypill/delete.do", method = RequestMethod.POST)
   public ModelAndView delete(MypillVO mypillVO) {
     ModelAndView mav = new ModelAndView();
-        
+    
     this.mypillProc.delete(mypillVO.getMypill_no()); // DBMS 삭제
-
- 
-    mav.setViewName("redirect:/mypill/list_all.do"); 
+    
+    mav.setViewName("redirect:/mypill/list_all.do");
     
     return mav;
   }   
   
+  /**
+   * 내알약 컬럼 체크 http://localhost:9093/mypill/check.do
+   * 
+   * @return
+   */
+  @ResponseBody
+  @RequestMapping(value = "/mypill/check.do", method = RequestMethod.GET)
+  public int check(HttpServletRequest request, HttpSession session) {
+      int memberno = (int) session.getAttribute("memberno"); 
+      
+      String pillNoString = request.getParameter("pill_no");
+      int pill_no = Integer.parseInt(pillNoString);
+
+      HashMap<String, Integer> map = new HashMap<>();
+      map.put("memberno", memberno);
+      map.put("pill_no", pill_no);
+
+      int cnt = this.mypillProc.check(map);
+      
+      return cnt;
+  }
+
+
 }

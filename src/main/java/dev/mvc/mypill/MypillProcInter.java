@@ -1,6 +1,7 @@
 package dev.mvc.mypill;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public interface MypillProcInter {
   /**
@@ -22,4 +23,11 @@ public interface MypillProcInter {
    * @return 삭제된 레코드 갯수
    */
   public int delete(int mypill_no);
+  
+  /**
+   * 내 알약 컬럼 체크
+   * @param map (memberno, pill_no를 포함하는 HashMap)
+   * @return cnt
+   */
+  public int check(HashMap<String, Integer> map);
 }
