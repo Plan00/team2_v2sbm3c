@@ -127,5 +127,11 @@ public class MemberProc implements MemberProcInter {
     return cnt;
   }
 
+  @Override
+  public int update_grade(MemberVO memberVO) {
+    int cnt = this.memberDAO.update_grade(memberVO);
+    return cnt;
+  }
+
 
 }

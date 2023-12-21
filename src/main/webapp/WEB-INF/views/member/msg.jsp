@@ -97,11 +97,17 @@
           </li>                                                                     
         </c:when>   
         
-        <c:when test="${code == 'passwd_update_fail'}"> <%-- Java if --%>
+        <c:when test="${param.code == 'update_grade_success'}"> <%-- Java if --%>
           <li class='li_none'>
-            <span class="span_fail">${param.mname }님(${param.id }) 패스워드 변경에 실패했습니다.</span>
+            <span class="span_fail">회원 탈퇴 완료되었습니다.</span>
           </li>                                                                      
-        </c:when>  
+        </c:when>
+        
+        <c:when test="${param.code == 'update_grade_fail'}"> <%-- Java if --%>
+          <li class='li_none'>
+            <span class="span_fail">회원 탈퇴에 실패했습니다.</span>
+          </li>                                                                      
+        </c:when>
         
         <c:otherwise>
           <li class='li_none_left'>

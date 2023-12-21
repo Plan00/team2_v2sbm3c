@@ -28,7 +28,7 @@
       <c:choose>
         <c:when test="${param.code == 'create_success'}"> <%-- Java if --%>
           <li class='li_none'>
-            <span class="span_success">${param.pill_name }이 내 알약에 등록되었습니다.</span>
+            <span class="span_success">내 알약에 등록했습니다.</span>
           </li>  
           <li class='li_none'>
             <button type='button' 

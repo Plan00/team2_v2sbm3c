@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dev.mvc.manlogin.ManloginDAOInter">
+  <!-- 로그인 내역 생성 -->
+  <insert id="create" parameterType="dev.mvc.manlogin.ManloginVO">
+    INSERT INTO manlogin(manloginno, manager_no, ip, ldate)
+    VALUES (manlogin_seq.nextval, #{manager_no}, #{ip}, sysdate)
+  </insert>
+  
+  <!-- 전체 출력 -->
+  <select id="list_all" resultType="dev.mvc.manlogin.ManloginVO">
+    SELECT manloginno, manager_no, ip, ldate FROM manlogin ORDER BY manloginno DESC
+  </select>
+  
+</mapper>

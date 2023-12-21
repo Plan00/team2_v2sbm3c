@@ -28,7 +28,7 @@ public class DiseaseCont {
   
   @Autowired
   @Qualifier("dev.mvc.manager.ManagerProc") 
-  private ManagerProcInter managerProc; 
+  private ManagerProcInter managerProc;
   
 //  @Autowired    // DiseaseProcInter interface 구현한 객체를 만들어 자동으로 할당하라
 //  @Qualifier("dev.mvc.issue.IssueProc")

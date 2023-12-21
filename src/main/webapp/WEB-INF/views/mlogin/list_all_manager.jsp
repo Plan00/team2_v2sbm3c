@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, minimum-scale=1.0, maximum-scale=10.0, width=device-width" /> 
-<title>http://localhost:9093/mypill/list_all.do</title>
+<title>http://localhost:9093/mlogin/list_all_manager.do</title>
 <link rel="shortcut icon" href="/images/star.png" /> <%-- /static 기준 --%>
 <link href="/css/style.css" rel="Stylesheet" type="text/css"> <!-- /static 기준 -->
 
@@ -17,8 +17,7 @@
 </head>
 <body>
 <c:import url="/menu/top.do" />
-
-  <div class='title_line'>내 알약 목록</div>
+  <div class='title_line'>전체 사용자 로그인 내역</div>
   
   <aside class="aside_right">
     <a href="javascript:location.reload();">새로고침</a>
@@ -28,28 +27,28 @@
   <table class="table table-hover">
     <colgroup>
         <col style='width: 10%;'/>
-        <col style='width: 40%;'/>
         <col style='width: 10%;'/>    
-        <col style='width: 10%;'/>
+        <col style='width: 20%;'/>
+        <col style='width: 20%;'/>
       </colgroup>
       <thead>
         <tr>
-          <th class="th_bs">순서</th>
-          <th class="th_bs">이름</th>
-          <th class="th_bs">등록일</th>
-          <th class="th_bs">기타</th>
+          <th class="th_bs">로그인 번호</th>
+          <th class="th_bs">사용자 번호</th>
+          <th class="th_bs">IP</th>
+          <th class="th_bs">로그인 일자</th>
         </tr>
       </thead>
       <tbody>
-        <c:forEach var="mypillVO" items="${list }" varStatus="info">
-          <c:set var="mypill_no" value="${mypillVO.mypill_no }" />
-          <c:set var="pill_no" value="${mypillVO.pill_no }" />
+        <c:forEach var="mloginVO" items="${list }" varStatus="info">
+          <c:set var="mloginno" value="${mloginVO.mloginno }" />
+          <c:set var="memberno" value="${mloginVO.memberno }" />
     
           <tr>
-          <td class="td_bs">${mypill_no }</td>
-          <td><a href="../pill/read.do?pill_no=${pill_no}" style="display: block; text-align: center;">${mypillVO.mypill_name}</a></td>
-          <td class="td_bs">${mypillVO.mypill_date.substring(0, 10) }</td>
-          <td style="text-align: center;"><a href="./delete.do?mypill_no=${mypill_no }" title="삭제"><img src="/cate/images/delete.png" class="icon" ></a></td>
+          <td class="td_bs">${mloginno }</td>
+          <td class="td_bs">${memberno }</td>
+          <td class="td_bs">${mloginVO.ip }</td>
+          <td class="td_bs">${mloginVO.ldate.substring(0, 10) }</td>
         </tr>
       </c:forEach>
       </tbody>

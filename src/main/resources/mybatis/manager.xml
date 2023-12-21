@@ -17,7 +17,7 @@
     WHERE manager_id=#{manager_id}
   </select>
   
-  <!-- mno를 통한 회원 정보 -->
+  <!-- manager_no를 통한 관리자 정보 -->
   <select id="read" resultType="dev.mvc.manager.ManagerVO" parameterType ="int" >
     SELECT manager_no, manager_id, manager_passwd, manager_name, manager_date, manager_grade
     FROM manager

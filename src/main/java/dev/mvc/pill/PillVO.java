@@ -140,13 +140,6 @@ public class PillVO {
   public void setNow_page(int now_page) {
     this.now_page = now_page;
   }
-  @Override
-  public String toString() {
-    return "PillVO [pill_no=" + pill_no + ", dno=" + dno + ", manager_no=" + manager_no + ", pill_name=" + pill_name
-        + ", views=" + views + ", efficacy=" + efficacy + ", side=" + side + ", file1MF=" + file1MF + ", file1=" + file1
-        + ", file1saved=" + file1saved + ", thumb1=" + thumb1 + ", size1=" + size1 + ", start_num=" + start_num
-        + ", end_num=" + end_num + ", now_page=" + now_page + "]";
-  }
   public String getSize1_label() {
     return size1_label;
   }
@@ -172,5 +165,11 @@ public class PillVO {
     this.rdate = rdate;
   }
   
-  
+  @Override
+  public String toString() {
+    return "PillVO [pill_no=" + pill_no + ", dno=" + dno + ", manager_no=" + manager_no + ", pill_name=" + pill_name
+        + ", views=" + views + ", efficacy=" + efficacy + ", side=" + side + ", file1MF=" + file1MF + ", file1=" + file1
+        + ", file1saved=" + file1saved + ", thumb1=" + thumb1 + ", size1=" + size1 + ", start_num=" + start_num
+        + ", end_num=" + end_num + ", now_page=" + now_page + "]";
+  }
 }

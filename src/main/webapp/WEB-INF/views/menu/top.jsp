@@ -67,9 +67,9 @@
                     <a class="dropdown-item" href="/member/passwd_update.do">비밀번호 변경</a>
                     <a class="dropdown-item" href="/member/read.do">회원 정보 수정</a>
                     <a class="dropdown-item" href="/mypill/list_all.do">내 알약</a>
-                    <a class="dropdown-item" href="javascript: alert('개발 예정')">증상에 따른 질병 찾기</a>
-                    <a class="dropdown-item" href="javascript: alert('개발 예정')">로그인 내역</a>
-                    <a class="dropdown-item" href="javascript: alert('개발 예정')">회원 탈퇴</a>
+                    <a class="dropdown-item" href="http://localhost:8000/ais/recommend_form/?memberno=${sessionScope.memberno}">증상에 따른 질병 찾기</a>
+                    <a class="dropdown-item" href="/mlogin/list_all.do">로그인 내역</a>
+                    <a class="dropdown-item" href="/member/update_grade.do">회원 탈퇴</a>
                   </c:otherwise>
                 </c:choose>
               </div>
@@ -86,6 +86,7 @@
                   <a class="nav-link top_menu_link dropdown-toggle" data-bs-toggle="dropdown" href="#">관리자</a>
                   <div class="dropdown-menu">
                     <a class="dropdown-item" href='/disease/list_all.do'>카테고리 전체 목록</a>
+                    <a class="dropdown-item" href='/manlogin/list_all.do'>로그인 내역 목록</a>
                     <a class="dropdown-item" href='/member/list.do'>회원 목록</a>
                     <a class="dropdown-item" href='/manager/logout.do'>관리자 ${sessionScope.manager_id } 로그아웃</a>
                   </div>

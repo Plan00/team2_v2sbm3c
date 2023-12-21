@@ -73,5 +73,12 @@
     SET passwd=#{passwd}
     WHERE memberno=#{memberno}
   </update>
+  
+  <!-- 회원 탈퇴시 변경 -->
+  <update id="update_grade" parameterType="dev.mvc.member.MemberVO">
+    UPDATE member
+    SET grade=90
+    WHERE memberno=#{memberno}
+  </update>
      
 </mapper> 

@@ -133,11 +133,8 @@
               <div class="content_body_bottom">
                 <form name='frm' method='post' action='/mypill/create.do' enctype="multipart/form-data">
                     <input type="hidden" id="pill_no" name="pill_no" value="${pill_no}">
-                    <input type="hidden" id="pill_no" name="pill_no" value="${pill_no}">
+                    <input type="hidden" id="pill_name" name="pill_name" value="${pill_name}">
                     <button type="submit" id="create_mypill_btn" class="btn btn-secondary btn-sm">내 알약 등록</button>
-                </form>
-                <form name='frm' method='post' action='/mypill/delete.do' enctype="multipart/form-data" >
-                    <button type="submit" id="delete_mypill_btn" class="btn btn-secondary btn-sm" style="margin-top: 5pt;">내 알약 삭제</button>
                 </form>
               </div>
           </c:if>

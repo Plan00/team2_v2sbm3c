@@ -134,7 +134,7 @@ public class MypillCont {
    * 
    * @return
    */
-  @RequestMapping(value = "/mypill/delete.do", method = RequestMethod.POST)
+  @RequestMapping(value = "/mypill/delete.do", method = RequestMethod.GET)
   public ModelAndView delete(MypillVO mypillVO) {
     ModelAndView mav = new ModelAndView();
     
@@ -146,7 +146,7 @@ public class MypillCont {
   }   
   
   /**
-   * 내알약 컬럼 체크 http://localhost:9093/mypill/check.do
+   * 내 알약 중복 체크 http://localhost:9093/mypill/check.do
    * 
    * @return
    */

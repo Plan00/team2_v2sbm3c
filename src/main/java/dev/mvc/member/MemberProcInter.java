@@ -17,10 +17,10 @@ public interface MemberProcInter {
   
   /**
    * 회원 가입
-   * @param memVO
+   * @param memberVO
    * @return 추가한 레코드 갯수
    */
-  public int create(MemberVO memVO);
+  public int create(MemberVO memberVO);
   
   /**
    * 회원 전체 목록
@@ -65,10 +65,10 @@ public interface MemberProcInter {
   
   /**
    * 수정 처리
-   * @param memVO
+   * @param memberVO
    * @return
    */
-  public int update(MemberVO memVO);
+  public int update(MemberVO memberVO);
   
   /**
    * 회원 삭제 처리
@@ -95,4 +95,12 @@ public interface MemberProcInter {
    * @return 변경된 패스워드 갯수
    */
   public int passwd_update(HashMap<String, Object> map);
+  
+  /**
+   * 회원 탈퇴 처리
+   * @param memberVO
+   * @return
+   */
+  public int update_grade(MemberVO memberVO);
+  
 }

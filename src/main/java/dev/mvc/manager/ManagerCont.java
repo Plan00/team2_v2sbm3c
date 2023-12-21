@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import dev.mvc.manlogin.ManloginProcInter;
+import dev.mvc.manlogin.ManloginVO;
 import dev.mvc.tool.Tool;
 
 @Controller
@@ -19,6 +21,13 @@ public class ManagerCont {
   @Autowired
   @Qualifier("dev.mvc.manager.ManagerProc") 
   private ManagerProcInter managerProc;
+  
+  @Autowired
+  @Qualifier("dev.mvc.manlogin.ManloginProc") 
+  private ManloginProcInter manloginProc;
+  
+  @Qualifier("dev.mvc.manlogin.ManloginVO") 
+  private ManloginVO manloginVO;
   
   public ManagerCont() {
     System.out.println("-> ManagerCont created.");
@@ -98,6 +107,12 @@ public class ManagerCont {
        session.setAttribute("manager_id", managerVO_read.getManager_id());
        session.setAttribute("manager_mname", managerVO_read.getManager_name());
        session.setAttribute("manager_grade", managerVO_read.getManager_grade());
+       
+       String ip = request.getRemoteAddr();
+       ManloginVO manloginVO = new ManloginVO();
+       manloginVO.setManager_no(managerVO_read.getManager_no());
+       manloginVO.setIp(ip); 
+       manloginProc.create(manloginVO);
     
        String id = managerVO.getManager_id();                  // 폼에 입력된 id
        String passwd = managerVO.getManager_passwd();  // 폼에 입력된 passwd 
