@@ -24,20 +24,6 @@ public interface QnaProcInter {
   public QnaVO read(int qna_no);
   
   /**
-   * 검색 목록
-   * @param map
-   * @return
-   */
-  public ArrayList<QnaVO> list_search(HashMap<String, Object> hashMap);
-  
-  /**
-   * 검색된 레코드 갯수
-   * @param map
-   * @return
-   */
-  public int search_count(HashMap<String, Object> hashMap);
-  
-  /**
    *  검색 + 페이징된 글목록
    *  spring framework이 JDBC 관련 코드를 모두 생성해줌
    * @return
@@ -54,7 +40,7 @@ public interface QnaProcInter {
    * @param search_count 검색 레코드 수
    * @return 페이징 생성 문자열
    */ 
-  public String pagingBox(int now_page, String search, String list_file, int search_count);
+  public String pagingBox(int now_page, String list_file, int search_count);
   
   /**
    * 패스워드 검사
@@ -78,7 +64,7 @@ public interface QnaProcInter {
   public int delete(int qna_no);
   
   /**
-   * FK dno 값이 같은 레코드 갯수 산출
+   * 전체 레코드 반환
    * @return
    */
   public int count();

@@ -21,7 +21,6 @@
 
 <c:set var="code" value="${param.code }" /> <%--mav.addObject("code", "create_success"); --%>
 <c:set var="cnt" value="${param.cnt }" />     <%-- mav.addObject("cnt", cnt); --%>
-<c:set var="dno" value="${param.dno }" /> <%-- mav.addObject("dno", contentsVO.getCateno()); // redirect parameter 적용 --%>
 
 <DIV class='message'>
   <fieldset class='fieldset_basic'>
@@ -35,38 +34,31 @@
         
         <c:when test="${code == 'create_success'}"> <%-- Java if --%>
           <LI class='li_none'>
-            <span class="span_success">새로운 알약를 등록했습니다.</span>
+            <span class="span_success">새로운 QNA를 등록했습니다.</span>
           </LI> 
-        </c:when>
-        
-        <c:when test="${code == 'check_upload_file_fail'}"> <%-- Java if --%>
-          <li class='li_none'>
-            <span class="span_fail">업로드 할 수 없는 파일 형식입니다. </span><br>
-            <span>가능한 파일 형식[jpg, jpeg, png, gif, txt, hwp, doc, ppt, pptx, xls, xlsx, zip, tar, gz, ipynb]</span>
-          </li> 
         </c:when>
         
         <c:when test="${code == 'create_fail'}"> <%-- Java if --%>
           <LI class='li_none'>
-            <span class="span_fail">새로운 알약 등록에 실패했습니다.</span>
+            <span class="span_fail">새로운 QNA 등록에 실패했습니다.</span>
           </LI>                                                                      
         </c:when>
         
         <c:when test="${code == 'update_fail'}"> <%-- Java if --%>
           <LI class='li_none'>
-            <span class="span_fail">알약 수정에 실패했습니다.</span>
+            <span class="span_fail">QNA 수정에 실패했습니다.</span>
           </LI>                                                                      
         </c:when>
         
         <c:when test="${code == 'delete_success'}"> <%-- Java if --%>
           <LI class='li_none'>
-            <span class="span_success">알약 삭제에 성공했습니다.</span>
+            <span class="span_success">QNA 삭제에 성공했습니다.</span>
           </LI>                                                                      
         </c:when>        
         
         <c:when test="${code == 'delete_fail'}"> <%-- Java if --%>
           <LI class='li_none'>
-            <span class="span_fail">알약 삭제에 실패했습니다.</span>
+            <span class="span_fail">QNA 삭제에 실패했습니다.</span>
           </LI>                                                                      
         </c:when> 
         
@@ -87,9 +79,8 @@
             </c:when>
         </c:choose>
         
-        <button type='button' onclick="location.href='./create.do?dno=${dno}'" class="btn btn-secondary btn-sm">새로운 알약 등록</button>
-        <button type='button' onclick="location.href='./list_by_dno.do?dno=${dno}'" class="btn btn-secondary btn-sm">목록</button>
-        <button type='button' onclick="location.href='./list_by_dno_grid.do?dno=${dno}'" class="btn btn-secondary btn-sm">알약 목록</button>
+        <button type='button' onclick="location.href='./create.do'" class="btn btn-secondary btn-sm">새로운 QNA 등록</button>
+        <button type='button' onclick="location.href='./list_paging.do'" class="btn btn-secondary btn-sm">QNA 목록</button>
       </LI>
     </UL>
   </fieldset>

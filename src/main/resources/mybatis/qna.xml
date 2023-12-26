@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="dev.mvc.qna.QnaDAOInter">
-  <!-- 등록한 레코드 갯수 1 리턴, #{memberno}: public int getManagerno() 호출됨 -->
+  <!-- 등록한 레코드 갯수 1 리턴, #{memberno}: public int geMemberno() 호출됨 -->
   <insert id="create" parameterType="dev.mvc.qna.QnaVO">
     INSERT INTO qna(qna_no, memberno, qna_title, qna_main, qna_passwd, qna_date)
     VALUES(qna_seq.nextval, #{memberno}, #{qna_title}, #{qna_main}, #{qna_passwd}, sysdate)
@@ -10,7 +10,7 @@
   
   <!-- 모든 글목록 -->
   <select id="list_all" resultType="dev.mvc.qna.QnaVO">
-    SELECT qna_no, memberno, qna_title, qna_main, views, qna_passwd, qna_date,
+    SELECT qna_no, memberno, qna_title, qna_main, views, qna_passwd, qna_date
     FROM qna
     ORDER BY qna_no DESC
   </select> 
@@ -22,54 +22,14 @@
     WHERE qna_no = #{qna_no}
   </select>
   
-  <!-- 검색 목록 -->
-  <select id="list_search" resultType="dev.mvc.qna.QnaVO" parameterType="HashMap">
-    SELECT qna_no, memberno, qna_title, qna_main, views, qna_passwd, qna_date
-    FROM qna
-    <choose>
-      <when test="search == null or search == ''"> <!-- 검색하지 않는 경우 -->
-      </when>
-      <otherwise> <!-- 검색하는 경우 -->
-        WHERE (UPPER(qna_title) LIKE '%' || UPPER(#{search}) || '%'
-                    OR UPPER(qna_main) LIKE '%' || UPPER(#{search}) || '%' 
-                    OR UPPER(side) LIKE '%' || UPPER(#{search}) || '%')
-      </otherwise>
-    </choose>
-    ORDER BY qna_no DESC   
-  </select>
-   
-  <!-- 검색 레코드 갯수 -->
-  <select id="search_count" resultType="int" parameterType="HashMap">
-    SELECT COUNT(*) as cnt
-    FROM qna
-    <choose>
-      <when test="search == null or search == ''"> <!-- 검색하지 않는 경우의 레코드 갯수 -->
-      </when>
-      <otherwise> <!-- 검색하는 경우의 레코드 갯수 -->
-        WHERE (UPPER(qna_title) LIKE '%' || UPPER(#{search}) || '%' 
-                   OR UPPER(qna_main) LIKE '%' || UPPER(#{search}) || '%' 
-                   OR UPPER(side) LIKE '%' || UPPER(#{search}) || '%')
-      </otherwise>
-    </choose>
-  </select>
-  
-  <!-- 검색 + 페이징 목록 -->
-  <select id="list_search_paging" resultType="dev.mvc.qna.QnaVO" parameterType="dev.mvc.qna.QnaVO">
+  <!-- 페이징 목록 -->
+  <select id="list_paging" resultType="dev.mvc.qna.QnaVO" parameterType="dev.mvc.qna.QnaVO">
    SELECT qna_no, memberno, qna_title, qna_main, views, qna_passwd,  qna_date, r
    FROM (
               SELECT qna_no, memberno, qna_title, qna_main, views, qna_passwd,  qna_date, rownum as r
               FROM (
                         SELECT qna_no, memberno, qna_title, qna_main, views, qna_passwd,  qna_date
                         FROM qna
-                        <choose>
-                          <when test="search == null or search == ''"> <!-- 검색하지 않는 경우 -->
-                          </when>
-                          <otherwise>
-                            WHERE (UPPER(qna_title) LIKE '%' || UPPER(#{search}) || '%' 
-                                       OR UPPER(qna_main) LIKE '%' || UPPER(#{search}) || '%' 
-                                       OR UPPER(side) LIKE '%' || UPPER(#{search}) || '%')
-                          </otherwise>
-                        </choose>
                         ORDER BY qna_no DESC
                )
     )
@@ -91,6 +51,7 @@
     WHERE qna_no = #{qna_no}
   </update>
   
+  <!-- 선택 레코드 삭제 -->
   <delete id="delete" parameterType="int">
     DELETE FROM qna
     WHERE qna_no=#{qna_no}

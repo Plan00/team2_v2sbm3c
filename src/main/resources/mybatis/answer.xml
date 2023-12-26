@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dev.mvc.answer.AnswerDAOInter">
+  <!-- 등록한 레코드 갯수 1 리턴, #{manger_no}: public int getManagerno() 호출됨 -->
+  <insert id="create" parameterType="dev.mvc.answer.AnswerVO">
+    INSERT INTO answer(ano, qna_no, manager_no, amain, adate)
+    VALUES(answer_seq.nextval, #{qna_no}, #{manager_no}, #{amain}, sysdate)
+  </insert>
+  
+  <!-- 특정 QNA 답변 목록 -->
+  <select id="list_all_by_qna_no" resultType="dev.mvc.answer.AnswerVO" parameterType="int">
+    SELECT ano, qna_no, manager_no, amain, adate
+    FROM answer
+    WHERE qna_no = #{qna_no}
+    ORDER BY ano DESC
+  </select>
+  
+  <!-- 모든 답변 목록 -->
+  <select id="list_all" resultType="dev.mvc.answer.AnswerVO">
+    SELECT ano, qna_no, manager_no, amain, adate
+    FROM answer
+    ORDER BY ano DESC
+  </select>
+  
+  <!-- 일반적인 조회 -->
+  <select id="read" resultType="dev.mvc.answer.AnswerVO" parameterType="int">
+    SELECT ano, qna_no, manager_no, amain, adate
+    FROM answer
+    WHERE ano = #{ano}
+  </select>
+  
+  <!-- 글 수정 -->
+  <update id="update_text" parameterType="dev.mvc.answer.AnswerVO">
+    UPDATE answer
+    SET amain=#{amain}
+    WHERE ano = #{ano}
+  </update>
+  
+  <!-- 선택 레코드 삭제 -->
+  <delete id="delete" parameterType="int">
+    DELETE FROM answer
+    WHERE ano=#{ano}
+  </delete>
+</mapper>

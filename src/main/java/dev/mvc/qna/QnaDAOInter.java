@@ -12,7 +12,7 @@ public interface QnaDAOInter {
   public int create(QnaVO qnaVO);
   
   /**
-   * 모든 카테고리의 등록된 글 목록
+   * 등록된 글 목록
    * @return
    */
   public ArrayList<QnaVO> list_all();
@@ -24,25 +24,11 @@ public interface QnaDAOInter {
   public QnaVO read(int qna_no);
   
   /**
-   * 검색 목록
-   * @param map
-   * @return
-   */
-  public ArrayList<QnaVO> list_search(HashMap<String, Object> hashMap);
-  
-  /**
-   * 검색된 레코드 갯수
-   * @param map
-   * @return
-   */
-  public int search_count(HashMap<String, Object> hashMap);
-  
-  /**
    *  검색 + 페이징된 글목록
    *  spring framework이 JDBC 관련 코드를 모두 생성해줌
    * @return
    */
-  public ArrayList<QnaVO> list_search_paging(QnaVO qnaVO);
+  public ArrayList<QnaVO> list_paging(QnaVO qnaVO);
   
   /**
    * 패스워드 검사
@@ -66,7 +52,7 @@ public interface QnaDAOInter {
   public int delete(int qna_no);
   
   /**
-   * FK dno 값이 같은 레코드 갯수 산출
+   * 전체 레코드 반환
    * @return
    */
   public int count();

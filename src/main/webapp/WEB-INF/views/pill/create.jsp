@@ -56,7 +56,7 @@
     <input type="hidden" name="dno" value="${param.dno }">
     
     <div>
-       <label>제목</label>
+       <label>품목명</label>
        <input type='text' name='pill_name' value='' required="required" 
                  autofocus="autofocus" class="form-control" style='width: 100%;'>
     </div>
