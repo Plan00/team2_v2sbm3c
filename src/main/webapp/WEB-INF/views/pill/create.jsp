@@ -31,7 +31,7 @@
   </aside>
   
   <div style="text-align: right; clear: both;">  
-    <form name='frm' id='frm' method='get' action='./list_by_dno_search_paging.do'>
+    <form name='frm' id='frm' method='get' action='./list_by_dno.do'>
       <input type='hidden' name='dno' value='${diseaseVO.dno }'>  <%-- 게시판의 구분 --%>
       
       <c:choose>

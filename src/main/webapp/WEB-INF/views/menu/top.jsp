@@ -69,7 +69,7 @@
                     <a class="dropdown-item" href="/mypill/list_all.do">내 알약</a>
                     <a class="dropdown-item" href="/qna/list_paging.do">QNA</a>
                     <a class="dropdown-item" href="http://3.37.25.197:8000/ais/recommend_form/?memberno=${sessionScope.memberno}">증상에 따른 질병 찾기</a>
-                    <a class="dropdown-item" href="http://3.37.25.197:9091/chatbot?memberno=${sessionScope.memberno}">챗봇</a>
+                    <a class="dropdown-item" href="http://3.37.25.197:5000/chatbot?memberno=${sessionScope.memberno}">챗봇</a>
                     <a class="dropdown-item" href="/mlogin/list_all.do">로그인 내역</a>
                     <a class="dropdown-item" href="/member/update_grade.do">회원 탈퇴</a>
                   </c:otherwise>

@@ -66,7 +66,7 @@
           <td class="td_bs">${diseaseVO.cnt }</td>
           <td class="td_bs">${diseaseVO.rdate.substring(0, 10) }</td>
           <td class="td_bs">
-            <a href="../issue/create.do?dno=${dno }" title="등록"><img src="/cate/images/create.png" class="icon"></a>
+            <a href="../pill/create.do?dno=${dno }" title="등록"><img src="/cate/images/create.png" class="icon"></a>
             <c:choose>
               <c:when test="${diseaseVO.visible == 'Y' }">
                 <a href="./update_visible_n.do?dno=${dno }" title="카테고리 공개 설정"><img src="/cate/images/show.png" class="icon"></a>

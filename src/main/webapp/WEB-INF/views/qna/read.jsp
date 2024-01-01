@@ -21,6 +21,73 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+$(document).ready(function () {
+    // 페이지 로딩 시에는 버튼 영역을 감춤
+    $("#answerBtnArea").hide();
+
+    // "답변 보기" 버튼 클릭 이벤트 처리
+    $("#showAnswerBtn").on("click", function () {
+        // Ajax 통신
+        $.ajax({
+            url: "/answer/read_by_qna_no.do",
+            method: "GET",
+            data: { qna_no: "${qna_no}" },
+            success: function (response) {
+                // 서버에서의 응답을 처리
+                if (response.answerVO) {
+                    // 답변이 있는 경우
+                    $("#answerContainer").html(response.answerVO.amain);
+                    // 답변이 있을 때는 "답변 수정하기" 버튼을 보이고 "답변 작성하기" 버튼을 숨김
+                    $("#editAnswerBtn").show();
+                    // "답변 수정하기" 버튼 클릭 이벤트 처리에 ano 전달
+                    $("#editAnswerBtn").on("click", function () {
+                        // ano 값을 가져와서 URL에 추가
+                        var ano = response.answerVO.ano;
+                        window.location.href = "/answer/update_text.do?ano=" + ano + "&qna_title=${qna_title}&qna_no=${qna_no}";
+                    });
+                    $("#writeAnswerBtn").hide();
+                    // 답변이 있을 때는 "답변 삭제하기" 버튼을 보이도록 처리
+                    $("#deleteAnswerBtn").show();
+                    // "답변 삭제하기" 버튼 클릭 이벤트 처리
+                    $("#deleteAnswerBtn").on("click", function () {
+                        if (confirm("답변을 삭제하시겠습니까?")) {
+                            // 확인 시 삭제 처리
+                            var ano = response.answerVO.ano;
+                            var qna_title = "${qna_title}";
+                            window.location.href = "/answer/delete.do?ano=" + ano + "&qna_title=" + qna_title;
+                        }
+                    });
+                    
+                } else {
+                    // 답변이 없는 경우
+                    $("#answerContainer").html("아직 답변이 등록되지 않았습니다.");
+                    // 답변이 없을 때는 "답변 작성하기" 버튼을 보이고 "답변 수정하기" 버튼을 숨김
+                    $("#writeAnswerBtn").show();
+                    $("#editAnswerBtn").hide();
+                    // "답변 작성하기" 버튼 클릭 이벤트 처리
+                    $("#writeAnswerBtn").on("click", function () {
+                        window.location.href = "/answer/create.do?qna_no=${qna_no}&qna_title=${qna_title}";
+                    });
+                    // 답변이 없을 때는 "답변 삭제하기" 버튼을 숨기도록 처리
+                    $("#deleteAnswerBtn").hide();
+                }
+                // 버튼 영역을 보이도록 처리
+                $("#answerBtnArea").show();
+            },
+            error: function () {
+                // 에러 처리
+                console.error("Ajax 요청 중 에러 발생");
+            },
+        });
+    });
+
+    
+
+    
+});
+</script>
 </head> 
  
 <body>
@@ -57,6 +124,19 @@
           <span style="font-size: 1em;"> ${qna_date }</span><br>
           내용: ${qna_main }
         </DIV>
+        
+        <DIV id="answer_line" class='menu_line'></DIV>
+        
+        <button id="showAnswerBtn" class="btn btn-secondary btn-sm">답변 보기</button><br><br>
+        <div id="answerContainer"></div><br>
+        
+        <%-- 답변이 있을 때, 없을 때의 버튼 영역 --%>
+        <div id="answerBtnArea" style="display: none;">
+          <button id="editAnswerBtn" onclick="location.href='/answer/update_text.do?ano=${answerVO.ano}&qna_no=${qna_no}&qna_title=${qna_title}'" class="btn btn-secondary btn-sm">답변 수정하기</button>
+          <button id="writeAnswerBtn" class="btn btn-secondary btn-sm">답변 작성하기</button>
+          <button id="deleteAnswerBtn" class="btn btn-secondary btn-sm">답변 삭제하기</button>
+        </div>
+        
       </li>
 
     </ul>

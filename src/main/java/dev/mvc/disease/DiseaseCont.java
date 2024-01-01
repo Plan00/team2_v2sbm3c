@@ -285,7 +285,6 @@ public class DiseaseCont {
  public ModelAndView update_visible_y(int dno) {
    ModelAndView mav = new ModelAndView();
    
-   
    int cnt = this.diseaseProc.update_visible_y(dno);
    System.out.println("-> cnt: " + cnt);
    
@@ -308,7 +307,6 @@ public class DiseaseCont {
  @RequestMapping(value="/disease/update_visible_n.do", method = RequestMethod.GET)
  public ModelAndView update_visible_n(int dno) {
    ModelAndView mav = new ModelAndView();
-   
    
    int cnt = this.diseaseProc.update_visible_n(dno);
    System.out.println("-> cnt: " + cnt);

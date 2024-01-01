@@ -1,16 +1,15 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<c:set var="qna_no" value="${qnaVO.qna_no }" />
-<c:set var="qna_title" value="${qnaVO.qna_title }" />
-<c:set var="qna_main" value="${qnaVO.qna_main }" />
+<c:set var="ano" value="${answerVO.ano }" />
+<c:set var="qna_no" value="${answerVO.qna_no }" />
  
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="ko"> 
 <head> 
 <meta charset="UTF-8"> 
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
-<title>http://localhost:9093/qna/update.do</title>
+<title>http://localhost:9093/answer/update.do</title>
 <link rel="shortcut icon" href="/images/shortcut.png" /> <%-- /static 기준 --%>
 <link href="/css/style.css" rel="Stylesheet" type="text/css"> <!-- /static 기준 -->
 
@@ -22,34 +21,21 @@
 <body>
 <c:import url="/menu/top.do" />
  
-  <div class='title_line'> ${qna_title } > 수정</div>
+  <div class='title_line'> ${param.qna_title } > 답변 수정</div>
   
   <aside class="aside_right">
-    <a href="./create.do">등록</a>
-    <span class='menu_divide' >│</span>
     <a href="javascript:location.reload();">새로고침</a>
   </aside>
   
   <div class='menu_line'></div>
   
   <form name='frm' method='post' action='./update_text.do'>
-    <input type="hidden" name="dno" value="${dno }">
     <input type="hidden" name="qna_no" value="${qna_no }">
-    <input type="hidden" name="now_page" value="${param.now_page }">
+    <input type="hidden" name="ano" value="${ano }">
     
     <div>
-       <label>제목</label>
-       <input type='text' name='qna_title' value='${qna_title }' required="required" 
-                 autofocus="autofocus" class="form-control" style='width: 100%;'>
-    </div>
-    <div>
-       <label>내용</label>
-       <textarea name='qna_main' required="required" class="form-control" rows="12" style='width: 100%;'>${qna_main }</textarea>
-    </div>
-    <div>
-      <label>패스워드</label>
-      <input type='password' name='qna_passwd' value='' required="required" 
-                class="form-control" style='width: 50%;'>
+       <label>답변 내용</label>
+       <textarea name='amain' required="required" class="form-control" rows="12" style='width: 100%;'>${qna_main }</textarea>
     </div>
        
     <div class="content_body_bottom">

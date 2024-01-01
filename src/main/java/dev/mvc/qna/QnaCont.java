@@ -53,11 +53,11 @@ public class QnaCont {
     return mav; // forward
   }
   
-   //등록 폼
-   // http://localhost:9093/qna/create.do  X
-   // http://localhost:9093/qna/create.do
-   // http://localhost:9093/qna/create.do
-   // http://localhost:9093/qna/create.do
+  /**
+   * 등록 폼
+   * http://localhost:9093/qna/create.do
+   * @return
+   */
    @RequestMapping(value="/qna/create.do", method = RequestMethod.GET)
    public ModelAndView create() {
      ModelAndView mav = new ModelAndView();
@@ -215,7 +215,7 @@ public class QnaCont {
    public ModelAndView update_text(HttpSession session, int qna_no) {
      ModelAndView mav = new ModelAndView();
      
-     if (managerProc.isManager(session)) { // 회원으로 로그인한경우
+     if (managerProc.isManager(session)) { // 관리자로 로그인한경우
        QnaVO qnaVO = this.qnaProc.read(qna_no);
        mav.addObject("qnaVO", qnaVO);
        
@@ -239,7 +239,7 @@ public class QnaCont {
    public ModelAndView update_text(HttpSession session, QnaVO qnaVO) {
      ModelAndView mav = new ModelAndView();
      
-     if (this.managerProc.isManager(session)) { // 사용자 로그인 확인
+     if (this.managerProc.isManager(session)) { // 관리자 로그인 확인
        HashMap<String, Object> hashMap = new HashMap<String, Object>();
        hashMap.put("qna_no", qnaVO.getQna_no());
        hashMap.put("qna_passwd", qnaVO.getQna_passwd());

@@ -24,3 +24,12 @@ COMMENT ON COLUMN ANSWER.AMAIN is '답변 내용';
 COMMENT ON COLUMN ANSWER.ADATE is '답변 등록일';
 
 commit;
+
+DROP SEQUENCE ANSWER_SEQ;
+
+CREATE SEQUENCE ANSWER_SEQ
+  START WITH 1         -- 시작 번호
+  INCREMENT BY 1       -- 증가값
+  MAXVALUE 9999999999  -- 최대값: 9999999999 --> NUMBER(10) 대응
+  CACHE 2              -- 2번은 메모리에서만 계산
+  NOCYCLE;             -- 다시 1부터 생성되는 것을 방지

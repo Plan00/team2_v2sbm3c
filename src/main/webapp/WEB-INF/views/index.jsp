@@ -19,7 +19,7 @@
 <c:import url="/menu/top.do" />
 
   <div style="width: 100%; margin: 50px auto;  text-align: center;">
-    <img src="/images/main_1280.jpg" style="width: 60%;" height="800">
+    <img src="/images/main_1280.jpg" style="width: 60%;" height="900">
   </div>
 
 <jsp:include page="./menu/bottom.jsp" flush='false' /> 

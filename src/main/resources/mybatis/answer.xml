@@ -8,18 +8,18 @@
     VALUES(answer_seq.nextval, #{qna_no}, #{manager_no}, #{amain}, sysdate)
   </insert>
   
-  <!-- 특정 QNA 답변 목록 -->
-  <select id="list_all_by_qna_no" resultType="dev.mvc.answer.AnswerVO" parameterType="int">
-    SELECT ano, qna_no, manager_no, amain, adate
-    FROM answer
-    WHERE qna_no = #{qna_no}
-    ORDER BY ano DESC
-  </select>
-  
   <!-- 모든 답변 목록 -->
   <select id="list_all" resultType="dev.mvc.answer.AnswerVO">
     SELECT ano, qna_no, manager_no, amain, adate
     FROM answer
+    ORDER BY ano DESC
+  </select>
+  
+    <!-- 특정 QNA 답변 조회 -->
+  <select id="read_by_qna_no" resultType="dev.mvc.answer.AnswerVO" parameterType="int">
+    SELECT ano, qna_no, manager_no, amain, adate
+    FROM answer
+    WHERE qna_no = #{qna_no}
     ORDER BY ano DESC
   </select>
   
@@ -31,7 +31,7 @@
   </select>
   
   <!-- 글 수정 -->
-  <update id="update_text" parameterType="dev.mvc.answer.AnswerVO">
+  <update id="update_text" parameterType="dev.mvc.answer.AnswerVO" >
     UPDATE answer
     SET amain=#{amain}
     WHERE ano = #{ano}

@@ -30,7 +30,7 @@
   <aside class="aside_right">
     <%-- 관리자로 로그인해야 등록 가능 --%>
     <c:if test="${sessionScope.manager_id != null }">
-      <a href="./create.do?dno=${diseaseVO.dno }">등록</a>
+      <a href="./create.do?dno=${diseaseVO.dno }&now_page=${param.now_page == null ? 1 : param.now_page }">등록</a>
       <span class='menu_divide' >│</span>
     </c:if>
     <a href="javascript:location.reload();">새로고침</a>
