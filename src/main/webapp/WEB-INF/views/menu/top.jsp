@@ -28,8 +28,9 @@
 
 <div class='container_main'>
   <div class='top_img'>
-    <div class="top_menu_label" style="font: bold; color: silver; font-family: sans-serif; font-size: large;">알약 정보 사이트</div>      
-  </div> <!-- <div class='top_img'></div> 종료 -->
+    <img src='/css/images/top_img.jpg' alt='이미지'>
+    <div class="top_menu_label">알약 정보 사이트</div>
+  </div> 
   
 
   <nav class="navbar navbar-expand-md navbar-dark bg-dark">

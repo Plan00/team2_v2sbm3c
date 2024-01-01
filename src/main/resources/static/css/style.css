@@ -18,17 +18,26 @@
   Spring Boot: /static/css/images/top_image_1920.jpg
   */
   .top_img {
+    position: relative;
     width: 100%;
     height: 276px;
-    background-image: url('/css/images/top_img.jpg');
     margin-bottom: 2px;
   }
   
+  .top_img img {
+      width: 100%; 
+      height: 276px;
+      opacity: 0.9;
+    }
+  
  .top_menu_label {
-    position: relative; /* 속해 있는 부모 태그 기준 설정 */
-    top: 1%;
-    left: 0.5%;
-    color: #FFFFFF;
+    position: absolute; /* 속해 있는 부모 태그 기준 설정 */
+    top: 50%;
+    left: 50%;
+    font-weight: bold;
+    transform: translate(-50%, -50%);
+    color: #AAAAAA;
+    font-size: xx-large;
   }
   
   .top_menu {
